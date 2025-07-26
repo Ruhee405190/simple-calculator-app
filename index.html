@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f0f0f0;
+        }
+        .calculator {
+            width: 250px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .display {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 20px;
+            text-align: right;
+        }
+        .button {
+            width: 50px;
+            height: 40px;
+            margin: 5px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" class="display" id="display" disabled>
+        <div class="row">
+            <button class="button col-3" onclick="clearDisplay()">C</button>
+            <button class="button col-3" onclick="backspace()">DEL</button>
+            <button class="button col-3" onclick="calculate('%')">%</button>
+            <button class="button col-3" onclick="calculate('/')">/</button>
+        </div>
+        <div class="row">
+            <button class="button col-3" onclick="calculate('7')">7</button>
+            <button class="button col-3" onclick="calculate('8')">8</button>
+            <button class="button col-3" onclick="calculate('9')">9</button>
+            <button class="button col-3" onclick="calculate('*')">*</button>
+        </div>
+        <div class="row">
+            <button class="button col-3" onclick="calculate('4')">4</button>
+            <button class="button col-3" onclick="calculate('5')">5</button>
+            <button class="button col-3" onclick="calculate('6')">6</button>
+            <button class="button col-3" onclick="calculate('-')">-</button>
+        </div>
+        <div class="row">
+            <button class="button col-3" onclick="calculate('1')">1</button>
+            <button class="button col-3" onclick="calculate('2')">2</button>
+            <button class="button col-3" onclick="calculate('3')">3</button>
+            <button class="button col-3" onclick="calculate('+')">+</button>
+        </div>
+        <div class="row">
+            <button class="button col-6" onclick="calculate('0')">0</button>
+            <button class="button col-3" onclick="calculate('.')">.</button>
+            <button class="button col-3" onclick="equal()">=</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script>
+        let display = document.getElementById('display');
+        let expression = '';
+
+        function calculate(value) {
+            expression += value;
+            display.value = expression;
+        }
+
+        function clearDisplay() {
+            expression = '';
+            display.value = '';
+        }
+
+        function backspace() {
+            expression = expression.slice(0, -1);
+            display.value = expression;
+        }
+
+        function equal() {
+            try {
+                let result = eval(expression);
+                display.value = result;
+                expression = result.toString();
+            } catch (error) {
+                display.value = 'Error';
+                expression = '';
+            }
+        }
+    </script>
+</body>
+</html>
